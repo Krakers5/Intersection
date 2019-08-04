@@ -1,0 +1,26 @@
+<div class="container-fluid sidebar-example">
+  <div class="row sidebar-example__main">
+    <div class="col-md-3 sidebar-example__left">Left sidebar</div>
+    <div class="col-md-6 sidebar-example__middle">Middle</div>
+    <div #right class="sidebar-example__right col-md-3">
+      <div class="sidebar-example__right-content">
+        <p>Fixed right sidebar</p>
+        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consequatur dolorem fuga illo. Ab atque
+          blanditiis error eum illo ipsam nesciunt praesentium provident vero voluptatem? Alias asperiores eos est
+          incidunt itaque maxime mollitia nulla pariatur, quaerat quos reprehenderit veniam? Ad adipisci atque
+          blanditiis dolore error inventore natus nisi possimus vitae. </p>
+        <div *ngFor="let photo of photos">
+          <img class="sidebar-example__right-photo" src="{{photo}}"/>
+        </div>
+        <div class="sidebar-example__right-more">
+          <p #more>More photos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div #footer class="col-md-12 sidebar-example__footer">
+      footer
+    </div>
+  </div>
+</div>

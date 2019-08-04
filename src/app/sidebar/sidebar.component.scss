@@ -1,0 +1,42 @@
+.sidebar-example {
+  margin-top: 56px;
+  &__main {
+    min-height: 200vh;
+    text-align: center;
+  }
+
+  &__left {
+    background: darkseagreen;
+  }
+
+  &__middle {
+    background: deepskyblue;
+  }
+
+  &__right {
+    position: fixed;
+    top: 56px;
+    right: 0;
+    height: calc(100vh - 56px);
+    background: bisque;
+  }
+
+  &__right-content {
+    max-height: 500px;
+    overflow: auto;
+  }
+
+  &__right-photo {
+    width: 100%;
+  }
+
+  &__right-more {
+    height: 50px;
+    background: rosybrown;
+  }
+
+  &__footer {
+      height: 300px;
+      border-top: 1px solid green;
+  }
+}
