@@ -24,8 +24,3 @@ export class LazyDirective implements OnInit {
     observer.observe(this.el.nativeElement);
   }
 }
-
-/* prawdopodobnie jeśli dodamy dane przez Input, to wtedy trzeba uzyc afterviewinit
-   uzasadnic unobserve
-   uzasadnic min height
- */
