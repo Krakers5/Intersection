@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class SidebarComponent implements OnInit {
   @ViewChild('footer', {read: ElementRef}) footer: ElementRef;
-  @ViewChild('right', {read: ElementRef}) right: ElementRef;
+  @ViewChild('rightColumn', {read: ElementRef}) rightColumn: ElementRef;
   @ViewChild('more', {read: ElementRef}) more: ElementRef;
 
   photos = [];
@@ -36,23 +36,17 @@ export class SidebarComponent implements OnInit {
   }
 
   lazyLoad() {
-    const options = {
-      root: null,
-      rootMargin: '150px',
-      threshold: [0, 0.25, 0.5]
-    };
-
-    const observer = new IntersectionObserver((entries) => {
+     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const footerTarget = entry.target as HTMLElement;
-          const rightHeight = this.right.nativeElement.offsetHeight;
-          const rightTopPosition = this.computeAbsolutePosition(footerTarget.offsetTop, rightHeight);
-          this.right.nativeElement.style.position = 'absolute';
-          this.right.nativeElement.style.top = `${rightTopPosition}px`;
+          const rightColumnHeight = this.rightColumn.nativeElement.offsetHeight;
+          const rightTopPosition = this.computeAbsolutePosition(footerTarget.offsetTop, rightColumnHeight);
+          this.rightColumn.nativeElement.style.position = 'absolute';
+          this.rightColumn.nativeElement.style.top = `${rightTopPosition}px`;
         } else {
-          this.right.nativeElement.style.position = 'fixed';
-          this.right.nativeElement.style.top = '56px';
+          this.rightColumn.nativeElement.style.position = 'fixed';
+          this.rightColumn.nativeElement.style.top = '56px';
         }
       });
     });
@@ -64,9 +58,9 @@ export class SidebarComponent implements OnInit {
 
   lazyLoadInside() {
     const options = {
-      root: this.right.nativeElement,
+      root: this.rightColumn.nativeElement,
       rootMargin: '0px',
-      threshold: [0.01, 0.99]
+      threshold: 1
     };
 
     const observer = new IntersectionObserver((entries) => {
