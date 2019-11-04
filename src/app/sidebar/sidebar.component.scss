@@ -14,11 +14,17 @@
   }
 
   &__right {
-    position: fixed;
-    top: 56px;
+    background: bisque;
     right: 0;
     height: calc(100vh - 56px);
-    background: bisque;
+
+    &--fixed {
+      position: fixed;
+    }
+
+    &--absolute {
+      position: absolute;
+    }
   }
 
   &__right-content {

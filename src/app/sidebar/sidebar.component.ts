@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -15,7 +15,8 @@ export class SidebarComponent implements OnInit {
   photos = [];
   nextPhoto = 1;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private renderer: Renderer2) {
   }
 
   ngOnInit() {
@@ -42,16 +43,29 @@ export class SidebarComponent implements OnInit {
           const footerTarget = entry.target as HTMLElement;
           const rightColumnHeight = this.rightColumn.nativeElement.offsetHeight;
           const rightTopPosition = this.computeAbsolutePosition(footerTarget.offsetTop, rightColumnHeight);
-          this.rightColumn.nativeElement.style.position = 'absolute';
+          this.setRightColumnAbsolute();
           this.rightColumn.nativeElement.style.top = `${rightTopPosition}px`;
         } else {
-          this.rightColumn.nativeElement.style.position = 'fixed';
-          this.rightColumn.nativeElement.style.top = '56px';
+          this.setRightColumnFixed();
         }
       });
     });
     observer.observe(this.footer.nativeElement);
   }
+
+  setRightColumnFixed() {
+    if (this.rightColumn.nativeElement.classList.contains('sidebar-example__right--absolute')) {
+      this.renderer.removeClass(this.rightColumn.nativeElement, 'sidebar-example__right--absolute');
+    }
+    this.renderer.addClass(this.rightColumn.nativeElement, 'sidebar-example__right--fixed');
+    this.rightColumn.nativeElement.style.top = '56px';
+  }
+
+  setRightColumnAbsolute() {
+    this.renderer.removeClass(this.rightColumn.nativeElement, 'sidebar-example__right--fixed');
+    this.renderer.addClass(this.rightColumn.nativeElement, 'sidebar-example__right--absolute');
+  }
+
   computeAbsolutePosition(top: number, height: number) {
     return top - height;
   }
